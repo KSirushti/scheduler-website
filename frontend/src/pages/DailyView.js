@@ -1,6 +1,6 @@
 import React from 'react';
 import './DailyView.css';
-import Navbar from '../components/Navbar';
+import Navbar from './components/Navbar';
 
 const DailyView = () => {
   const today = new Date().toDateString();
