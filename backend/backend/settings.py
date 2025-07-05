@@ -59,7 +59,7 @@ MIDDLEWARE = [
 ]
 
 # ✅ CORS Configuration
-CORS_ALLOW_ALL_ORIGINS = False  # ❌ Don't keep this True with CORS_ALLOWED_ORIGINS
+
 CORS_ALLOWED_ORIGINS = [
     "https://scheduler-website.vercel.app",
     "https://scheduler-website.onrender.com",
