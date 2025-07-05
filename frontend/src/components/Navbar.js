@@ -2,11 +2,11 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import './Navbar.css';
 
-const Navbar = () => {
+function Navbar() {
   return (
     <nav className="navbar">
-      <h2>📅 Scheduler</h2>
-      <ul className="nav-links">
+      <div className="navbar-logo">Scheduler</div>
+      <ul className="navbar-links">
         <li><Link to="/">Home</Link></li>
         <li><Link to="/motivation">Motivation</Link></li>
         <li><Link to="/calendar">Calendar</Link></li>
@@ -14,6 +14,6 @@ const Navbar = () => {
       </ul>
     </nav>
   );
-};
+}
 
 export default Navbar;
