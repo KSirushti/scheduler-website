@@ -6,7 +6,6 @@ class TaskSerializer(serializers.ModelSerializer):
         model = Task
         fields = '__all__'
 
-
 class MoodLogSerializer(serializers.ModelSerializer):
     class Meta:
         model = MoodLog
