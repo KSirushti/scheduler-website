@@ -9,6 +9,10 @@ from .serializers import TaskSerializer, MoodLogSerializer
 from django.views.decorators.csrf import csrf_exempt
 from django.utils.decorators import method_decorator
 
+from django.http import JsonResponse
+
+def ping(request):
+    return JsonResponse({"status": "ok"})
 # Task View
 @method_decorator(csrf_exempt, name='dispatch')
 class TaskListCreateView(APIView):
