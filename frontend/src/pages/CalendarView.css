@@ -1,64 +1,48 @@
 .calendar-container {
-  padding: 2rem;
-  background-color: #ffcdb2;
-  font-family: 'Segoe UI', sans-serif;
+  background-color: #FFCDB2;
+  min-height: 100vh;
+  padding: 20px;
+  color: #6D6875;
 }
 
 .calendar-header {
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
   align-items: center;
-  background: #b5828c;
-  padding: 10px 20px;
-  color: white;
-  border-radius: 5px;
+  gap: 15px;
+  margin-bottom: 20px;
 }
 
 .calendar-header h2 {
-  margin: 0;
+  font-size: 1.5rem;
+  color: #B5828C;
 }
 
 .calendar-grid {
   display: grid;
   grid-template-columns: repeat(7, 1fr);
   gap: 10px;
-  margin-top: 1rem;
 }
 
-.calendar-cell {
-  background-color: #fff;
-  border: 1px solid #b5828c;
-  border-radius: 5px;
-  min-height: 100px;
-  padding: 5px;
-  position: relative;
+.calendar-day-header {
+  font-weight: bold;
+  text-align: center;
+  color: #B5828C;
+}
+
+.calendar-day {
+  background-color: #FFB4A2;
+  text-align: center;
+  padding: 20px;
+  border-radius: 6px;
   cursor: pointer;
 }
 
-.empty-cell {
-  background: transparent;
+.calendar-day:hover {
+  background-color: #E5989B;
 }
 
-.date-label {
-  font-weight: bold;
-  color: #e5989b;
-}
-
-.task-list {
-  list-style-type: disc;
-  padding-left: 15px;
-  margin-top: 5px;
-  font-size: 0.9rem;
-}
-
-.task-popup {
-  position: fixed;
-  top: 30%;
-  left: 50%;
-  transform: translate(-50%, -30%);
-  background: white;
-  padding: 20px;
-  border: 2px solid #e5989b;
-  border-radius: 8px;
-  z-index: 999;
+.empty {
+  background-color: transparent;
+  pointer-events: none;
 }

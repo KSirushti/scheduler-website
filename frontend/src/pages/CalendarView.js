@@ -1,87 +1,72 @@
+// src/pages/CalendarView.js
 import React, { useState } from 'react';
+import Navbar from '../components/Navbar';
 import './CalendarView.css';
 
-const CalendarView = () => {
-  const [currentDate, setCurrentDate] = useState(new Date());
-  const [tasks, setTasks] = useState({});
-  const [selectedDate, setSelectedDate] = useState(null);
-  const [newTask, setNewTask] = useState('');
+const daysOfWeek = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
 
-  const startOfMonth = new Date(currentDate.getFullYear(), currentDate.getMonth(), 1);
-  const endOfMonth = new Date(currentDate.getFullYear(), currentDate.getMonth() + 1, 0);
-  const startDay = startOfMonth.getDay();
-  const daysInMonth = endOfMonth.getDate();
+function CalendarView() {
+  const today = new Date();
+  const [currentMonth, setCurrentMonth] = useState(today.getMonth());
+  const [currentYear, setCurrentYear] = useState(today.getFullYear());
 
-  const handleDateClick = (date) => {
-    setSelectedDate(date);
-    setNewTask('');
+  const getDaysInMonth = (month, year) => new Date(year, month + 1, 0).getDate();
+
+  const generateCalendar = () => {
+    const days = getDaysInMonth(currentMonth, currentYear);
+    const firstDay = new Date(currentYear, currentMonth, 1).getDay();
+    const blanks = Array(firstDay).fill(null);
+    const dates = Array.from({ length: days }, (_, i) => i + 1);
+    return [...blanks, ...dates];
   };
 
-  const handleAddTask = () => {
-    if (!newTask.trim()) return;
-    setTasks((prev) => ({
-      ...prev,
-      [selectedDate]: [...(prev[selectedDate] || []), newTask],
-    }));
-    setNewTask('');
-    setSelectedDate(null);
+  const handleDayClick = (date) => {
+    alert(`You clicked on ${currentMonth + 1}/${date}/${currentYear}`);
+    // Later redirect to /daily or open modal
   };
 
-  const goToPreviousMonth = () => {
-    setCurrentDate(new Date(currentDate.getFullYear(), currentDate.getMonth() - 1, 1));
-  };
-
-  const goToNextMonth = () => {
-    setCurrentDate(new Date(currentDate.getFullYear(), currentDate.getMonth() + 1, 1));
-  };
-
-  const renderDays = () => {
-    const days = [];
-    for (let i = 0; i < startDay; i++) {
-      days.push(<div key={`empty-${i}`} className="empty-cell" />);
+  const changeMonth = (offset) => {
+    let newMonth = currentMonth + offset;
+    let newYear = currentYear;
+    if (newMonth > 11) {
+      newMonth = 0;
+      newYear++;
+    } else if (newMonth < 0) {
+      newMonth = 11;
+      newYear--;
     }
-    for (let day = 1; day <= daysInMonth; day++) {
-      const dateKey = `${currentDate.getFullYear()}-${currentDate.getMonth()}-${day}`;
-      days.push(
-        <div key={day} className="calendar-cell" onClick={() => handleDateClick(dateKey)}>
-          <span className="date-label">{day}</span>
-          <ul className="task-list">
-            {(tasks[dateKey] || []).map((task, idx) => (
-              <li key={idx}>{task}</li>
-            ))}
-          </ul>
-        </div>
-      );
-    }
-    return days;
+    setCurrentMonth(newMonth);
+    setCurrentYear(newYear);
   };
+
+  const calendar = generateCalendar();
 
   return (
-    <div className="calendar-container">
-      <div className="calendar-header">
-        <button onClick={goToPreviousMonth}>&lt;</button>
-        <h2>
-          {currentDate.toLocaleString('default', { month: 'long' })} {currentDate.getFullYear()}
-        </h2>
-        <button onClick={goToNextMonth}>&gt;</button>
-      </div>
-      <div className="calendar-grid">{renderDays()}</div>
-
-      {selectedDate && (
-        <div className="task-popup">
-          <h3>Add Task for {selectedDate}</h3>
-          <input
-            type="text"
-            placeholder="Enter task"
-            value={newTask}
-            onChange={(e) => setNewTask(e.target.value)}
-          />
-          <button onClick={handleAddTask}>Add Task</button>
-          <button onClick={() => setSelectedDate(null)}>Cancel</button>
+    <div>
+      <Navbar />
+      <div className="calendar-container">
+        <div className="calendar-header">
+          <button onClick={() => changeMonth(-1)}>{'<'}</button>
+          <h2>{new Date(currentYear, currentMonth).toLocaleString('default', { month: 'long' })} {currentYear}</h2>
+          <button onClick={() => changeMonth(1)}>{'>'}</button>
         </div>
-      )}
+        <div className="calendar-grid">
+          {daysOfWeek.map((day, idx) => (
+            <div key={idx} className="calendar-day-header">{day}</div>
+          ))}
+          {calendar.map((date, idx) => (
+            <div
+              key={idx}
+              className={`calendar-day ${date ? '' : 'empty'}`}
+              onClick={() => date && handleDayClick(date)}
+            >
+              {date}
+            </div>
+          ))}
+        </div>
+      </div>
     </div>
   );
-};
+}
 
 export default CalendarView;
