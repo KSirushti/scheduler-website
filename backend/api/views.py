@@ -7,6 +7,12 @@ from rest_framework.permissions import AllowAny
 from .models import Task, MoodLog
 from .serializers import TaskSerializer, MoodLogSerializer
 
+from rest_framework.decorators import api_view
+
+@api_view(['GET'])
+def ping(request):
+    return Response({"message": "pong!"})
+    
 # Task View
 class TaskListCreateView(APIView):
     permission_classes = [AllowAny]
