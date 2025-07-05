@@ -25,10 +25,15 @@ const MoodForm = () => {
 
     try {
       const res = await axios.post(
-        'https://scheduler-api.onrender.com/api/mood/',
-        formData,
-        { headers: { 'Content-Type': 'multipart/form-data' } }
-      );
+  'https://scheduler-api.onrender.com/api/mood/',
+  formData,
+  {
+    headers: {
+      'Content-Type': 'multipart/form-data',
+    },
+    withCredentials: true, // ✅ Add this
+  }
+);
       setResponse(res.data);
     } catch (error) {
       console.error('Upload failed:', error);

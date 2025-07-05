@@ -1,11 +1,20 @@
-from rest_framework import generics
-from .models import Task, MoodLog
-from .serializers import TaskSerializer, MoodLogSerializer
+# api/views.py
+from rest_framework.views import APIView
+from rest_framework.response import Response
+from rest_framework.parsers import MultiPartParser, FormParser
+from rest_framework import status
+from .serializers import MoodSerializer
 
-class TaskListCreateView(generics.ListCreateAPIView):
-    queryset = Task.objects.all()
-    serializer_class = TaskSerializer
+from django.views.decorators.csrf import csrf_exempt
+from django.utils.decorators import method_decorator
 
-class MoodLogListCreateView(generics.ListCreateAPIView):
-    queryset = MoodLog.objects.all()
-    serializer_class = MoodLogSerializer
+@method_decorator(csrf_exempt, name='dispatch')  # 👈 Disable CSRF
+class MoodEntryView(APIView):
+    parser_classes = (MultiPartParser, FormParser)
+
+    def post(self, request, *args, **kwargs):
+        serializer = MoodSerializer(data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
