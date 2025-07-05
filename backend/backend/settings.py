@@ -1,9 +1,12 @@
 import dj_database_url
 from pathlib import Path
 from decouple import config
+import os
 import logging.config
 
 BASE_DIR = Path(__file__).resolve().parent.parent
+
+os.environ["DJANGO_ALLOW_ASYNC_UNSAFE"] = "true"
 
 # SECURITY
 SECRET_KEY = config("SECRET_KEY", default="your-secret-key")
