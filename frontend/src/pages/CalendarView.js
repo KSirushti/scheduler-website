@@ -1,17 +1,19 @@
-import React, { useState } from 'react';
+import React from 'react';
 import './CalendarView.css';
 import Navbar from '../components/Navbar';
 
 const CalendarView = () => {
   const today = new Date();
-  const currentDate = today.toDateString();
+  const month = today.toLocaleString('default', { month: 'long' });
+  const year = today.getFullYear();
 
   return (
-    <div className="calendar-container">
+    <div className="calendar-page">
       <Navbar />
-      <h2>Calendar View</h2>
-      <p>Today's Date: {currentDate}</p>
-      {/* You can map and display tasks/events here */}
+      <div className="calendar-header">
+        <h2>{month} {year}</h2>
+        <p>Google Calendar-style view coming soon...</p>
+      </div>
     </div>
   );
 };

@@ -1,0 +1,17 @@
+.daily-page {
+  background-color: #FFCDB2;
+  min-height: 100vh;
+  padding-top: 80px;
+  text-align: center;
+}
+
+.daily-heading {
+  font-size: 2rem;
+  color: #B5828C;
+}
+
+.daily-info {
+  color: #9C6B74;
+  font-size: 1.1rem;
+  margin-top: 10px;
+}

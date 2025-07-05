@@ -4,8 +4,10 @@
 
 body {
   margin: 0;
+  padding: 0;
+  box-sizing: border-box;
   font-family: 'Segoe UI', sans-serif;
-  background-color: #fff;
+  background-color: #FFCDB2;
 }
 
 
