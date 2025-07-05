@@ -24,7 +24,7 @@ const MoodForm = () => {
     if (file) formData.append('file', file);
 
     try {
-      const res = await axios.post("https://scheduler-website.onrender.com/api/mood/", formData,
+      const res = await axios.post("https://scheduler-api.onrender.com/api/mood/", formData,
   { headers: { 'Content-Type': 'multipart/form-data' } }
 );
 
