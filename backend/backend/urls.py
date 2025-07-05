@@ -27,5 +27,5 @@ def home_redirect_view(request):
 urlpatterns = [
     path('', home_redirect_view),
     path('admin/', admin.site.urls),
-    path('api/', include('yourapp.api_urls')),  # Replace 'yourapp' with actual app name
+    path('api/', include('api.urls')),  # Replace 'yourapp' with actual app name
 ]
