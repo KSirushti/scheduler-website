@@ -17,7 +17,6 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 
-# Step 1: Create a view for root URL
 from django.http import HttpResponseRedirect
 
 def home_redirect_view(request):
@@ -27,5 +26,5 @@ def home_redirect_view(request):
 urlpatterns = [
     path('', home_redirect_view),
     path('admin/', admin.site.urls),
-    path('api/', include('api.urls')),  # Replace 'yourapp' with actual app name
+    path('api/', include('api.urls')),
 ]

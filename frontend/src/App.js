@@ -4,6 +4,7 @@ import Home from './pages/Home';
 import CalendarView from './pages/CalendarView';
 import DailyView from './pages/DailyView';
 import UploadForm from './components/UploadForm';
+import MoodForm from './components/MoodForm';
 import './App.css';
 
 function App() {
@@ -14,6 +15,7 @@ function App() {
           <Route path="/" element={<Home />} />
           <Route path="/calendar" element={<CalendarView />} />
           <Route path="/daily" element={<DailyView />} />
+          <Route path="/mood" element={<MoodForm />} />
           <Route path="/upload" element={<UploadForm />} />
         </Routes>
       </div>

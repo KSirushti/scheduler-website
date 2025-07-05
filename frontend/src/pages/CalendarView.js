@@ -1,5 +1,6 @@
 // src/pages/CalendarView.js
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import Navbar from '../components/Navbar';
 import './CalendarView.css';
 
@@ -9,6 +10,7 @@ function CalendarView() {
   const today = new Date();
   const [currentMonth, setCurrentMonth] = useState(today.getMonth());
   const [currentYear, setCurrentYear] = useState(today.getFullYear());
+  const navigate = useNavigate();
 
   const getDaysInMonth = (month, year) => new Date(year, month + 1, 0).getDate();
 
@@ -21,8 +23,8 @@ function CalendarView() {
   };
 
   const handleDayClick = (date) => {
-    alert(`You clicked on ${currentMonth + 1}/${date}/${currentYear}`);
-    // Later redirect to /daily or open modal
+    const selectedDate = `${currentYear}-${String(currentMonth + 1).padStart(2, '0')}-${String(date).padStart(2, '0')}`;
+    navigate('/mood', { state: { selectedDate } });
   };
 
   const changeMonth = (offset) => {
