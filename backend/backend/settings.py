@@ -56,11 +56,14 @@ MIDDLEWARE = [
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
 ]
-CORS_ALLOW_CREDENTIALS = True
+CORS_ALLOW_ALL_ORIGINS = False
 
 CORS_ALLOWED_ORIGINS = [
-    "https://scheduler-website.vercel.app",  # ✅ Your Vercel frontend
+    "https://scheduler-website.vercel.app",  # ✅ Frontend domain
 ]
+
+CORS_ALLOW_CREDENTIALS = True
+
 ROOT_URLCONF = "backend.urls"
 
 TEMPLATES = [
