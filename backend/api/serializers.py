@@ -4,7 +4,8 @@ from .models import MoodLog
 class TaskSerializer(serializers.ModelSerializer):
     class Meta:
         model = Task
-        fields = ['id', 'title', 'file']
+        fields = ['id', 'title', 'description', 'date', 'file', 'media', 'created_at']
+
 
 
 class MoodLogSerializer(serializers.ModelSerializer):

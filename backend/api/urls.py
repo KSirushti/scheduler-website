@@ -3,6 +3,6 @@ from .views import TaskUploadView
 from .views import MoodLogView
 
 urlpatterns = [
-    path('upload/', TaskUploadView.as_view()),
-path('mood/', MoodLogView.as_view()),
+    path('upload/', TaskUploadView.as_view()),  # POST to /api/upload/
+    path('mood/', MoodLogView.as_view()),  # POST to /api/mood/
 ]

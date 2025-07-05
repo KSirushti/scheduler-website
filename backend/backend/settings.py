@@ -56,7 +56,10 @@ MIDDLEWARE = [
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
 ]
-CORS_ALLOW_ALL_ORIGINS = True
+CORS_ALLOW_ALL_ORIGINS = False
+CORS_ALLOWED_ORIGINS = [
+    "https://scheduler-website.vercel.app",  # ✅ Your deployed frontend
+]
 ROOT_URLCONF = "backend.urls"
 
 TEMPLATES = [
@@ -91,7 +94,7 @@ DATABASES = {
         'PORT': config('POSTGRES_PORT', default='5432'),
     }
 }
-
+DEBUG = False
 DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
 AWS_ACCESS_KEY_ID = config("AWS_ACCESS_KEY_ID")
 AWS_SECRET_ACCESS_KEY = config("AWS_SECRET_ACCESS_KEY")

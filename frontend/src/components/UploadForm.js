@@ -15,10 +15,10 @@ const UploadForm = () => {
 
     try {
       const res = await axios.post(
-        'https://scheduler-website.onrender.com/api/upload/',
-        formData,
-        { headers: { 'Content-Type': 'multipart/form-data' } }
-      );
+  'https://scheduler-api.onrender.com/api/upload/', // make sure this matches your backend!
+  formData,
+  { headers: { 'Content-Type': 'multipart/form-data' } }
+);
       setResponse(res.data);
     } catch (error) {
       console.error('Upload failed:', error);
