@@ -15,9 +15,17 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.urls import path,include
+from django.urls import path, include
 
+# Step 1: Create a view for root URL
+from django.http import HttpResponseRedirect
+
+def home_redirect_view(request):
+    return HttpResponseRedirect("https://scheduler-website.vercel.app/")
+
+# Step 2: Add it to urlpatterns
 urlpatterns = [
+    path('', home_redirect_view),
     path('admin/', admin.site.urls),
-    path('api/', include('api.urls')),
+    path('api/', include('yourapp.api_urls')),  # Replace 'yourapp' with actual app name
 ]
