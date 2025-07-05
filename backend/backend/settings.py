@@ -1,14 +1,11 @@
-import dj_database_url
 from pathlib import Path
+import dj_database_url
 from decouple import config
-import os
 import logging.config
+from corsheaders.defaults import default_headers, default_methods
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-os.environ["DJANGO_ALLOW_ASYNC_UNSAFE"] = "true"
-
-# SECURITY
 SECRET_KEY = config("SECRET_KEY", default="your-secret-key")
 DEBUG = False
 
@@ -20,14 +17,28 @@ ALLOWED_HOSTS = [
     "127.0.0.1",
 ]
 
-# Logging
+# ✅ CORS Configuration
+CORS_ALLOWED_ORIGINS = [
+    "https://scheduler-website.vercel.app",
+    "https://scheduler-website.onrender.com",
+]
+
+CORS_ALLOW_CREDENTIALS = True
+
+CORS_ALLOW_HEADERS = list(default_headers) + [
+    "content-disposition",
+    "x-csrftoken",
+    "x-requested-with",
+]
+
+CORS_ALLOW_METHODS = list(default_methods)
+
+# ✅ Logging
 LOGGING = {
     'version': 1,
     'disable_existing_loggers': False,
     'handlers': {
-        'console': {
-            'class': 'logging.StreamHandler',
-        },
+        'console': {'class': 'logging.StreamHandler'},
     },
     'root': {
         'handlers': ['console'],
@@ -35,9 +46,9 @@ LOGGING = {
     },
 }
 
-# Installed apps
+# ✅ Installed apps
 INSTALLED_APPS = [
-    'corsheaders',  # MUST BE FIRST
+    'corsheaders',  # 🔥 MUST BE FIRST
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -49,10 +60,10 @@ INSTALLED_APPS = [
     'api',
 ]
 
-# Middleware
+# ✅ Middleware
 MIDDLEWARE = [
-    'corsheaders.middleware.CorsMiddleware',  # MUST BE BEFORE CommonMiddleware
-    'django.middleware.common.CommonMiddleware',
+    'corsheaders.middleware.CorsMiddleware',  # 🔥 MUST BE FIRST
+    'django.middleware.common.CommonMiddleware',  # 🔥 MUST BE SECOND
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -61,28 +72,6 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
-# ✅ CORS Configuration
-
-CORS_ALLOWED_ORIGINS = [
-    "https://scheduler-website.vercel.app",
-    "https://scheduler-website.onrender.com",
-]
-CORS_ALLOW_CREDENTIALS = True
-
-# ✅ If you're using axios/fetch with cookies or auth headers
-CORS_ALLOW_HEADERS = [
-    "accept",
-    "accept-encoding",
-    "authorization",
-    "content-type",
-    "dnt",
-    "origin",
-    "user-agent",
-    "x-csrftoken",
-    "x-requested-with",
-]
-
-# Templates
 ROOT_URLCONF = "backend.urls"
 
 TEMPLATES = [
@@ -103,12 +92,11 @@ TEMPLATES = [
 
 WSGI_APPLICATION = "backend.wsgi.application"
 
-# Database
 DATABASES = {
     'default': dj_database_url.config(default=config('DATABASE_URL'))
 }
 
-# AWS S3
+# ✅ AWS S3 Media
 DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
 AWS_ACCESS_KEY_ID = config("AWS_ACCESS_KEY_ID")
 AWS_SECRET_ACCESS_KEY = config("AWS_SECRET_ACCESS_KEY")
@@ -119,7 +107,7 @@ AWS_DEFAULT_ACL = None
 AWS_QUERYSTRING_AUTH = False
 MEDIA_URL = f"https://{AWS_STORAGE_BUCKET_NAME}.s3.{AWS_S3_REGION_NAME}.amazonaws.com/"
 
-# Password Validation
+# ✅ Password Validation
 AUTH_PASSWORD_VALIDATORS = [
     {"NAME": "django.contrib.auth.password_validation.UserAttributeSimilarityValidator"},
     {"NAME": "django.contrib.auth.password_validation.MinimumLengthValidator"},
@@ -127,14 +115,10 @@ AUTH_PASSWORD_VALIDATORS = [
     {"NAME": "django.contrib.auth.password_validation.NumericPasswordValidator"},
 ]
 
-# Internationalization
 LANGUAGE_CODE = "en-us"
 TIME_ZONE = "UTC"
 USE_I18N = True
 USE_TZ = True
 
-# Static files
 STATIC_URL = "static/"
-
-# Auto field
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
