@@ -10,12 +10,13 @@ SECRET_KEY = config("SECRET_KEY", default="your-secret-key")
 DEBUG = False
 
 ALLOWED_HOSTS = [
-    'localhost',
-    '127.0.0.1',
-    'scheduler-api.onrender.com',
-    'scheduler-website.vercel.app',
-    'scheduler-website.onrender.com',
+    "scheduler-api.onrender.com",
+    "scheduler-website.vercel.app",
+    "scheduler-website.onrender.com",
+    "localhost",
+    "127.0.0.1"
 ]
+
 
 # Logging
 LOGGING = {
@@ -59,6 +60,7 @@ MIDDLEWARE = [
 ]
 
 # CORS Settings 🔥🔥
+CORS_ALLOW_ALL_ORIGINS = True
 CORS_ALLOWED_ORIGINS = [
     "https://scheduler-website.vercel.app",
     "https://scheduler-website.onrender.com",

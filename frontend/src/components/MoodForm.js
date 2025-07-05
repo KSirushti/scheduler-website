@@ -33,7 +33,6 @@ const MoodForm = () => {
           headers: {
             'Content-Type': 'multipart/form-data',
           },
-          withCredentials: true,
         }
       );
       setResponse(res.data);
