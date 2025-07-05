@@ -4,5 +4,5 @@ from .views import MoodLogView
 
 urlpatterns = [
     path('upload/', TaskUploadView.as_view()),  # POST to /api/upload/
-    path('mood/', MoodLogView.as_view()),  # POST to /api/mood/
+    path('mood/', MoodLogView.as_view(), name='mood-log'),
 ]
