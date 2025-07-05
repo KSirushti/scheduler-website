@@ -21,22 +21,25 @@ const MoodForm = () => {
     formData.append('mood', mood);
     formData.append('title', title);
     formData.append('description', description);
-    if (file) formData.append('file', file);
+    if (file) {
+      formData.append('file', file);
+    }
 
     try {
       const res = await axios.post(
-  'https://scheduler-api.onrender.com/api/mood/',
-  formData,
-  {
-    headers: {
-      'Content-Type': 'multipart/form-data',
-    },
-    withCredentials: true, // ✅ Add this
-  }
-);
+        'https://scheduler-api.onrender.com/api/mood/',
+        formData,
+        {
+          headers: {
+            'Content-Type': 'multipart/form-data',
+          },
+          withCredentials: true,
+        }
+      );
       setResponse(res.data);
     } catch (error) {
       console.error('Upload failed:', error);
+      alert('Upload failed. Please check your network or file size.');
     }
   };
 
@@ -44,7 +47,6 @@ const MoodForm = () => {
     <div className="mood-form">
       <h2>Mood Entry for {selectedDate}</h2>
       <form onSubmit={handleSubmit}>
-
         <label htmlFor="mood">Mood:</label>
         <select
           id="mood"

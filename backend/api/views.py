@@ -24,19 +24,23 @@ class TaskListCreateView(APIView):
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
-# Mood View
+
+# Mood Log View (for form submission)
 @method_decorator(csrf_exempt, name='dispatch')
 class MoodLogListCreateView(APIView):
     parser_classes = (MultiPartParser, FormParser)
 
     def get(self, request):
-        moods = MoodLog.objects.all()
+        moods = MoodLog.objects.all().order_by('-created_at')
         serializer = MoodLogSerializer(moods, many=True)
         return Response(serializer.data)
 
     def post(self, request):
         serializer = MoodLogSerializer(data=request.data)
         if serializer.is_valid():
-            serializer.save()
-            return Response(serializer.data, status=status.HTTP_201_CREATED)
+            mood_entry = serializer.save()
+            return Response({
+                "message": "Mood log created successfully",
+                "file": mood_entry.file.url if mood_entry.file else None
+            }, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
