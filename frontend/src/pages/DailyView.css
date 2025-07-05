@@ -1,0 +1,15 @@
+.daily-container {
+  background-color: #B5828C;
+  min-height: 100vh;
+  padding: 2rem;
+  color: #fff;
+}
+
+.daily-container h2 {
+  font-size: 2rem;
+  margin-bottom: 1rem;
+}
+
+.daily-container p {
+  font-size: 1.1rem;
+}

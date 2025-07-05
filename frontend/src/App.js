@@ -1,21 +1,22 @@
 import React from 'react';
-import { Routes, Route } from 'react-router-dom';
-import Home from './components/Home';
-import DailyView from './components/DailyView';
-import Calendar from './components/Calendar';
-import Navbar from './components/Navbar';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import Home from './pages/Home';
+import MotivationHome from './pages/MotivationHome';
+import CalendarView from './pages/CalendarView';
+import DailyView from './pages/DailyView';
+import './App.css';
 
-const App = () => {
+function App() {
   return (
-    <>
-      <Navbar />
+    <Router>
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route path="/calendar" element={<Calendar />} />
+        <Route path="/motivation" element={<MotivationHome />} />
+        <Route path="/calendar" element={<CalendarView />} />
         <Route path="/daily" element={<DailyView />} />
       </Routes>
-    </>
+    </Router>
   );
-};
+}
 
 export default App;

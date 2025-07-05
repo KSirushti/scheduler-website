@@ -1,0 +1,15 @@
+.calendar-container {
+  background-color: #E5989B;
+  min-height: 100vh;
+  padding: 2rem;
+  color: #fff;
+}
+
+.calendar-container h2 {
+  font-size: 2rem;
+  margin-bottom: 1rem;
+}
+
+.calendar-container p {
+  font-size: 1.1rem;
+}
