@@ -1,8 +1,7 @@
 from django.urls import path
-from .views import MoodLogCreateView
-from .views import TaskListCreateView
+from .views import TaskListCreateView, MoodLogListCreateView
 
 urlpatterns = [
-path('api/', TaskListCreateView.as_view(), name='task-list'),
-    path('mood/', MoodLogCreateView.as_view(), name='mood-create'),
+    path('tasks/', TaskListCreateView.as_view(), name='task-list-create'),
+    path('moodlogs/', MoodLogListCreateView.as_view(), name='moodlog-list-create'),
 ]

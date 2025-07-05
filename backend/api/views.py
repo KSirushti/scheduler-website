@@ -6,6 +6,6 @@ class TaskListCreateView(generics.ListCreateAPIView):
     queryset = Task.objects.all()
     serializer_class = TaskSerializer
 
-class MoodLogCreateView(generics.CreateAPIView):
+class MoodLogListCreateView(generics.ListCreateAPIView):
     queryset = MoodLog.objects.all()
     serializer_class = MoodLogSerializer
