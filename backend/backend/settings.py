@@ -43,7 +43,7 @@ DEBUG = True
 ALLOWED_HOSTS = [
     'localhost',
     '127.0.0.1',
-    'scheduler-website.onrender.com',  # ✅ Add your Render domain here
+    'scheduler-api.onrender.com',   # ✅ Add your Render domain here
 ]
 
 # Application definition
@@ -72,9 +72,19 @@ MIDDLEWARE = [
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
 ]
 CORS_ALLOW_ALL_ORIGINS = False
-
+CORS_ALLOW_HEADERS = [
+    "accept",
+    "accept-encoding",
+    "authorization",
+    "content-type",
+    "dnt",
+    "origin",
+    "user-agent",
+    "x-csrftoken",
+    "x-requested-with",
+]
 CORS_ALLOWED_ORIGINS = [
-    "https://scheduler-website.vercel.app",  # ✅ Frontend domain
+    "https://scheduler-website.vercel.app",  # ✅ Must match exactly
 ]
 
 CORS_ALLOW_CREDENTIALS = True
