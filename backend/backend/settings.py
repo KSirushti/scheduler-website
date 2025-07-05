@@ -66,6 +66,11 @@ CORS_ALLOWED_ORIGINS = [
     "https://scheduler-website.vercel.app",
     "https://scheduler-website.onrender.com",
 ]
+
+CSRF_TRUSTED_ORIGINS = [
+    "https://scheduler-website.vercel.app",
+    "https://scheduler-website.onrender.com",
+]
 CORS_ALLOW_CREDENTIALS = True
 CORS_ALLOW_HEADERS = [
     "accept",
