@@ -14,9 +14,8 @@ ALLOWED_HOSTS = [
     "scheduler-website.vercel.app",
     "scheduler-website.onrender.com",
     "localhost",
-    "127.0.0.1"
+    "127.0.0.1",
 ]
-
 
 # Logging
 LOGGING = {
@@ -35,7 +34,7 @@ LOGGING = {
 
 # Installed apps
 INSTALLED_APPS = [
-    'corsheaders',  # 🟢 Keep this on top
+    'corsheaders',  # MUST BE FIRST
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -49,23 +48,25 @@ INSTALLED_APPS = [
 
 # Middleware
 MIDDLEWARE = [
-    'corsheaders.middleware.CorsMiddleware',  # 🟢 Must be first
+    'corsheaders.middleware.CorsMiddleware',  # MUST BE BEFORE CommonMiddleware
+    'django.middleware.common.CommonMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
-    'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
-# CORS Settings 🔥🔥
-CORS_ALLOW_ALL_ORIGINS = True
+# ✅ CORS Configuration
+CORS_ALLOW_ALL_ORIGINS = False  # ❌ Don't keep this True with CORS_ALLOWED_ORIGINS
 CORS_ALLOWED_ORIGINS = [
     "https://scheduler-website.vercel.app",
     "https://scheduler-website.onrender.com",
 ]
 CORS_ALLOW_CREDENTIALS = True
+
+# ✅ If you're using axios/fetch with cookies or auth headers
 CORS_ALLOW_HEADERS = [
     "accept",
     "accept-encoding",
@@ -78,8 +79,9 @@ CORS_ALLOW_HEADERS = [
     "x-requested-with",
 ]
 
-# Django Templates
+# Templates
 ROOT_URLCONF = "backend.urls"
+
 TEMPLATES = [
     {
         "BACKEND": "django.template.backends.django.DjangoTemplates",
@@ -95,6 +97,7 @@ TEMPLATES = [
         },
     },
 ]
+
 WSGI_APPLICATION = "backend.wsgi.application"
 
 # Database
@@ -102,7 +105,7 @@ DATABASES = {
     'default': dj_database_url.config(default=config('DATABASE_URL'))
 }
 
-# AWS S3 Media
+# AWS S3
 DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
 AWS_ACCESS_KEY_ID = config("AWS_ACCESS_KEY_ID")
 AWS_SECRET_ACCESS_KEY = config("AWS_SECRET_ACCESS_KEY")
@@ -113,7 +116,7 @@ AWS_DEFAULT_ACL = None
 AWS_QUERYSTRING_AUTH = False
 MEDIA_URL = f"https://{AWS_STORAGE_BUCKET_NAME}.s3.{AWS_S3_REGION_NAME}.amazonaws.com/"
 
-# Auth Password Validation
+# Password Validation
 AUTH_PASSWORD_VALIDATORS = [
     {"NAME": "django.contrib.auth.password_validation.UserAttributeSimilarityValidator"},
     {"NAME": "django.contrib.auth.password_validation.MinimumLengthValidator"},
@@ -121,14 +124,14 @@ AUTH_PASSWORD_VALIDATORS = [
     {"NAME": "django.contrib.auth.password_validation.NumericPasswordValidator"},
 ]
 
-# i18n
+# Internationalization
 LANGUAGE_CODE = "en-us"
 TIME_ZONE = "UTC"
 USE_I18N = True
 USE_TZ = True
 
-# Static
+# Static files
 STATIC_URL = "static/"
 
-# Default PK field
+# Auto field
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
