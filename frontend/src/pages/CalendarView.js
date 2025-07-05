@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import './CalendarView.css';
-import Navbar from './components/Navbar';
+import Navbar from '../components/Navbar';
 
 const CalendarView = () => {
   const today = new Date();
