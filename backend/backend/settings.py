@@ -90,6 +90,9 @@ CORS_ALLOWED_ORIGINS = [
     "https://scheduler-website.vercel.app",
     "https://scheduler-website.onrender.com",  # if you ever test it directly
 ]
+CORS_ALLOWED_ORIGIN_REGEXES = [
+    r"^https://.*vercel\.app$",
+]
 
 CORS_ALLOW_CREDENTIALS = True
 
