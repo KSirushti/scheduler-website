@@ -43,8 +43,11 @@ DEBUG = True
 ALLOWED_HOSTS = [
     'localhost',
     '127.0.0.1',
-    'scheduler-api.onrender.com',   # ✅ Add your Render domain here
+    'scheduler-api.onrender.com',      # backend
+    'scheduler-website.vercel.app',    # ✅ frontend (Vercel)
+    'scheduler-website.onrender.com',  # ✅ frontend (if you open this directly)
 ]
+
 
 # Application definition
 
@@ -84,7 +87,8 @@ CORS_ALLOW_HEADERS = [
     "x-requested-with",
 ]
 CORS_ALLOWED_ORIGINS = [
-    "https://scheduler-website.vercel.app",  # ✅ Must match exactly
+    "https://scheduler-website.vercel.app",
+    "https://scheduler-website.onrender.com",  # if you ever test it directly
 ]
 
 CORS_ALLOW_CREDENTIALS = True
